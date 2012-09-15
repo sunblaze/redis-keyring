@@ -2,11 +2,11 @@
 require File.expand_path('../lib/keyring/version', __FILE__)
 
 Gem::Specification.new do |gem|
-  gem.authors       = ["James Smith"]
+  gem.authors       = ["James Reid-Smith"]
   gem.email         = ["sunblaze@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
-  gem.homepage      = ""
+  gem.description   = "A simple ruby library to help generate and manage redis keys"
+  gem.summary       = "A simple ruby library to help generate and manage redis keys"
+  gem.homepage      = "https://github.com/sunblaze/redis-keyring"
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
