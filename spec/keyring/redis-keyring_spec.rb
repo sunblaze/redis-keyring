@@ -5,11 +5,11 @@ describe Keyring do
     class A
       include Keyring
       
-      def initialize
-        keyring.test.id.to_s.should == "test:id"
+      def test
+        keyring.test.id.to_s
       end
     end
-    A.new
+    expect(A.new.test).to eq("test:id")
   end
   
   it "should allow you to set a namespace for the class" do
@@ -17,11 +17,11 @@ describe Keyring do
       include Keyring
       namespace_keyring "abc"
       
-      def initialize
-        keyring.test.id.to_s.should == "abc:test:id"
+      def test
+        keyring.test.id.to_s
       end
     end
-    B.new
+    expect(B.new.test).to eq("abc:test:id")
   end
   
   it "should allow you to set a namespace for the class, with more levels of scope" do
@@ -29,35 +29,35 @@ describe Keyring do
       include Keyring
       namespace_keyring "abc","test"
       
-      def initialize
-        keyring.id.to_s.should == "abc:test:id"
+      def test
+        keyring.id.to_s
       end
     end
-    C.new
+    expect(C.new.test).to eq("abc:test:id")
   end
   
   it "should allow you to set a global namespace for the entire application" do
     class D
       include Keyring
       
-      def initialize
-        keyring.test.id.to_s.should == "keyring:test:id"
+      def test
+        keyring.test.id.to_s
       end
     end
     Keyring.global_namespace = "keyring"
-    D.new
+    expect(D.new.test).to eq("keyring:test:id")
   end
   
   it "should allow you to set a global namespace for the entire application, with more levels of scope" do
     class E
       include Keyring
       
-      def initialize
-        keyring.id.to_s.should == "keyring:test:id"
+      def test
+        keyring.id.to_s
       end
     end
     Keyring.global_namespace = ["keyring","test"]
-    E.new
+    expect(E.new.test).to eq("keyring:test:id")
   end
   
   it "should allow for the combination of both global and class namespace" do
@@ -65,11 +65,11 @@ describe Keyring do
       include Keyring
       namespace_keyring :global,"d"
       
-      def initialize
-        keyring.id.to_s.should == "keyring:test:d:id"
+      def test
+        keyring.id.to_s
       end
     end
     Keyring.global_namespace = ["keyring","test"]
-    F.new
+    expect(F.new.test).to eq("keyring:test:d:id")
   end
 end
